@@ -62,7 +62,8 @@ function DisplayTodos () {
 
         content.classList.add("todo-content");
         actions.classList.add("actions");
-        edit.classList.add("edit", "bx bxs-edit");
+        edit.classList.add("edit");
+        // edit.classList.add("bx bxs-edit");
         deleteButton.classList.add("delete");
 
         content.innerHTML = `<input type="text" value="${todo.content}" readonly>`
@@ -78,5 +79,40 @@ function DisplayTodos () {
         todoItem.appendChild(actions);
 
         todoList.appendChild(todoItem);
+
+        if (todo.done) {
+            todoItem.classList.add("done");
+        }
+
+        input.addEventListener("click", e => {
+            todo.done = e.target.checked;
+            localStorage.setItem("todos", JSON.stringify(todos));
+
+            if (todo.done) {
+                todoItem.classList.add("done");
+            } else {
+                todoItem.classList.remove("done");
+            }
+
+            DisplayTodos();
+        })
+
+        edit.addEventListener("click", e => {
+            const input = content.querySelector("input");
+            input.removeAttribute("readonly");
+            input.focus();
+            input.addEventListener("blur", e => {
+                input.setAttribute("readonly", true);
+                todo.content = e.target.value;
+                localStorage.setItem("todos", JSON.stringify(todos));
+                DisplayTodos();
+            })
+        })
+
+        deleteButton.addEventListener("click", e => {
+            todos = todos.filter(t => t != todo);
+            localStorage.setItem("todos", JSON.stringify(todos));
+            DisplayTodos();
+        })
     })
 }

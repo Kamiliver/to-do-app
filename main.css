@@ -32,6 +32,16 @@ body {
     color: var(--dark);
 }
 
+.app {
+    width: 100%;
+    height: 10%;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    border-radius: 0 0 50% 50%;
+    background-color: #f9ea85;
+} 
+
 section {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -122,6 +132,11 @@ label .bubble.personal {
     box-shadow: var(--personal-glow);
 }
 
+label .bubble.study {
+    border-color: green;
+    box-shadow: rgb(33, 61, 33);
+}
+
 .bubble::after {
     content: '';
     display: block;
@@ -137,6 +152,11 @@ label .bubble.personal {
 .bubble.personal::after {
     background-color: var(--personal);
     box-shadow: var(--personal-glow);
+}
+
+.bubble.study::after {
+    background-color: green;
+    box-shadow: rgb(33, 61, 33);
 }
 
 input:checked ~ .bubble::after {
